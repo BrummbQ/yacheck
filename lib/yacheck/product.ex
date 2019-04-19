@@ -14,4 +14,16 @@ defmodule Yacheck.Product do
       %Product{product_code: "CF1", name: "Coffee", price: Money.new(1123, :GBP)}
     ]
   end
+
+  def tea do
+    available_products() |> Enum.at(0)
+  end
+
+  def strawberries do
+    available_products() |> Enum.at(1)
+  end
+
+  def coffee do
+    available_products() |> Enum.at(2)
+  end
 end
