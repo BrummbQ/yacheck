@@ -84,7 +84,6 @@ defmodule Yacheck.CartTest do
       rules: Yacheck.rules()
     })
 
-    # we have some rounding errors here 30.57 -> 30.58
-    assert Cart.total() == "£30.58"
+    assert Cart.total() == "£30.57"
   end
 end

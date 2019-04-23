@@ -7,7 +7,7 @@ defmodule Yacheck do
     [
       BuyOneGetOneFree.configure("GR1"),
       BulkDiscount.configure(%{product_code: "SR1", discounted_price: Money.new(450, :GBP)}),
-      BulkRelativeDiscount.configure(%{product_code: "CF1", discount: 2 / 3})
+      BulkRelativeDiscount.configure(%{product_code: "CF1", discount: 1 / 3})
     ]
   end
 end

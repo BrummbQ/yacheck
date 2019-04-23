@@ -64,16 +64,18 @@ defmodule Yacheck.CartRule.BulkRelativeDiscount do
 
   defp transform(cart, %{product_code: product_code, discount: discount}) do
     count = Enum.count(cart, fn item -> item.product_code == product_code end)
+    product = Enum.find(cart, fn item -> item.product_code == product_code end)
 
     new_cart =
       if count >= 3 do
-        Enum.map(cart, fn item ->
-          if item.product_code == product_code do
-            %{item | price: Money.multiply(item.price, discount)}
-          else
-            item
-          end
-        end)
+        cart ++
+          [
+            %Yacheck.Product{
+              product_code: product_code,
+              name: "Discount",
+              price: Money.multiply(product.price, 3) |> Money.multiply(discount) |> Money.neg()
+            }
+          ]
       else
         cart
       end

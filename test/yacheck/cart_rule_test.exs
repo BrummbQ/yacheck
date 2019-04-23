@@ -26,10 +26,15 @@ defmodule Yacheck.CartRuleTest do
 
   test "get bulk relative discount" do
     tea = %Product{product_code: "GR1", name: "Green tea", price: Money.new(100, :GBP)}
-    discount_tea = %{tea | price: Money.new(50, :GBP)}
+
+    discount_tea = %Product{
+      name: "Discount",
+      price: %Money{amount: -150, currency: :GBP},
+      product_code: "GR1"
+    }
 
     transform = BulkRelativeDiscount.configure(%{product_code: "GR1", discount: 0.5})
 
-    assert transform.([tea, tea, tea]) == {:ok, [discount_tea, discount_tea, discount_tea]}
+    assert transform.([tea, tea, tea]) == {:ok, [tea, tea, tea, discount_tea]}
   end
 end
